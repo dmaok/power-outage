@@ -4,6 +4,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  app.enableCors();
   const PORT = Number(process.env.PORT) || 8080;
   await app.listen(PORT);
 }
