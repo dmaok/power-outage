@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
+import { DbModule } from '../../db/db.module';
 import { PingController } from './ping.controller';
+import { PingService } from './ping.service';
 
 @Module({
-  imports: [],
+  imports: [DbModule],
   controllers: [PingController],
-  providers: [],
+  providers: [PingService],
 })
 export class PingModule {}

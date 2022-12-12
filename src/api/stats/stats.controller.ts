@@ -7,7 +7,7 @@ export class StatsController {
   constructor(private statsService: StatsService) {}
 
   @Get()
-  getStats() {
-    return this.statsService.getStats();
+  async getStats() {
+    return await this.statsService.getStats();
   }
 }
