@@ -11,8 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: 'actions/checkout@v2' # work in the sandbox
+      - name: create-json-credentials
+        id: create-json
+        uses: jsdaniell/create-json@1.1.2
         with:
-          submodules: true
+          name: 'power-outage-sa.json'
+          json: ${{ secrets.SA_FIREBASE }}
+          dir: 'credentials/'
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v0'
