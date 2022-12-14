@@ -30,9 +30,10 @@ const RecordChart = () => {
 
   const outageData = useMemo(() => {
     return serverData.reduce((acc, item, index, array) => {
-      const [prevItem, nextItem] = [
+      const [prevItem, nextItem, timestamp] = [
         array[index - 1],
-        array[index + 1]
+        array[index + 1],
+        new Date().getTime(),
       ];
 
       if (prevItem && (item.time - prevItem.time > PING_INTERVAL * 2)) {
@@ -41,6 +42,10 @@ const RecordChart = () => {
       acc.push(serializePoint(item, 1));
       if (nextItem && (nextItem.time - item.time > PING_INTERVAL * 2)) {
         acc.push(serializePoint(item, 0));
+      }
+      if (!nextItem && (timestamp - item.time > PING_INTERVAL * 2)) {
+        acc.push(serializePoint(item, 0));
+        acc.push(serializePoint({ time: timestamp }, 0));
       }
       return acc;
     }, []);
