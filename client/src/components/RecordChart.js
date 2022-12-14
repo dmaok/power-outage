@@ -4,14 +4,14 @@ import {
   Chart,
   ArgumentAxis,
   ValueAxis,
-  LineSeries,
   Title
 } from '@devexpress/dx-react-chart-material-ui';
 import {
   ArgumentScale,
   ValueScale,
   Animation,
-  ZoomAndPan
+  ZoomAndPan,
+  AreaSeries,
 } from '@devexpress/dx-react-chart';
 import { scaleLinear, scaleTime } from 'd3-scale';
 import env from '../env';
@@ -60,9 +60,8 @@ const RecordChart = () => {
         <ValueScale factory={scaleLinear} modifyDomain={modifyDomain} />
         <ArgumentAxis />
         <ValueAxis tickFormat={format} />
-
-        <LineSeries valueField="powerValue" argumentField="date" />
-        <Title text="Power outage logger" />
+        <AreaSeries name="💡" valueField="powerValue" argumentField="date" />
+        <Title text="⚡️Power outage logger" />
         <ZoomAndPan
           viewport={viewPort}
           onViewportChange={setViewPort}
