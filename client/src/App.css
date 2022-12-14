@@ -10,15 +10,15 @@ body {
 }
 
 a {
-  color: #fff;
+  color: #212121;
   font-weight: 600;
   text-decoration: underline;
-  filter: drop-shadow(0 0 2px #f90);
+  filter: drop-shadow(0 0 2px #ff9000);
 }
 
 a:hover {
   text-decoration: none;
-  filter: drop-shadow(0 0 0 #f90);
+  filter: drop-shadow(0 0 0 #000);
 }
 
 .not-found-page {
@@ -45,10 +45,8 @@ a:hover {
   gap: 1rem;
   height: 100%;
   grid-template-rows: 50px 1fr 50px;
-  margin: 0 auto;
-  max-width: 900px;
   padding: 0 1rem;
-  background-color: #1b2536;
+  background-color: #fff;
   box-shadow: 0 0 17px 5px rgb(255 247 170 / 10%);
 }
 
@@ -77,6 +75,10 @@ a:hover {
 
 .app-navigation li {
   list-style: none;
+}
+
+.app-navigation li a {
+  padding: 1rem;
 }
 
 .loading-container {

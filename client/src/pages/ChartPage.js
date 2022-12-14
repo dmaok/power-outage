@@ -1,7 +1,7 @@
-import Chart from "../components/Chart";
+import RecordChart from "../components/RecordChart";
 
 const ChartPage = () => {
-  return <Chart/>;
+  return <RecordChart/>;
 }
 
 export default ChartPage;
