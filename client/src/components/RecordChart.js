@@ -12,6 +12,7 @@ import {
   Animation,
   ZoomAndPan,
   AreaSeries,
+  LineSeries,
 } from '@devexpress/dx-react-chart';
 import { scaleLinear, scaleTime } from 'd3-scale';
 import env from '../env';
@@ -19,9 +20,10 @@ import env from '../env';
 const PING_INTERVAL = 1000 * 60 * 5;
 const modifyDomain = () => [0, 10];
 const format = (scale) => scale.tickFormat(1);
-const serializePoint = (point, value) => ({
+const serializePoint = (point, value, online) => ({
   date: point.time,
-  powerValue: value
+  powerValue: value,
+  online: online ? 1 : 0,
 });
 
 const RecordChart = () => {
@@ -39,7 +41,7 @@ const RecordChart = () => {
       if (prevItem && (item.time - prevItem.time > PING_INTERVAL * 2)) {
         acc.push(serializePoint(item, 0));
       }
-      acc.push(serializePoint(item, 1));
+      acc.push(serializePoint(item, 1, item.online));
       if (nextItem && (nextItem.time - item.time > PING_INTERVAL * 2)) {
         acc.push(serializePoint(item, 0));
       }
@@ -65,7 +67,9 @@ const RecordChart = () => {
         <ValueScale factory={scaleLinear} modifyDomain={modifyDomain} />
         <ArgumentAxis />
         <ValueAxis tickFormat={format} />
-        <AreaSeries name="💡" valueField="powerValue" argumentField="date" />
+        <AreaSeries name="💡" valueField="powerValue" argumentField="date"/>
+        <LineSeries argumentField="date" valueField="online" name="Online"/>
+
         <Title text="⚡️Power outage logger" />
         <ZoomAndPan
           viewport={viewPort}

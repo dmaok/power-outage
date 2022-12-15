@@ -22,7 +22,7 @@ export class DatabaseService {
     return this.toArray(await this.db.collection(collection).get());
   }
 
-  write(collection, data) {
+  write<T>(collection: string, data: T) {
     const dbCollection = this.db.collection(collection);
     return dbCollection.add(data);
   }
