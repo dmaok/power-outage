@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import Paper from '@mui/material/Paper';
 import {
   Chart,
@@ -16,6 +16,7 @@ import {
 } from '@devexpress/dx-react-chart';
 import { scaleLinear, scaleTime } from 'd3-scale';
 import env from '../env';
+import { Button, Icon, IconButton } from '@mui/material';
 
 const PING_INTERVAL = 1000 * 60 * 5;
 const modifyDomain = () => [0, 10];
@@ -53,6 +54,18 @@ const RecordChart = () => {
     }, []);
   }, [serverData]);
 
+  const handleSetViewPort = useCallback((viewPort) => {
+    setViewPort(viewPort);
+  }, []);
+
+  const handleMoveToday = useCallback(() => {
+    const argumentEnd = new Date();
+    const argumentStart = new Date();
+    argumentStart.setDate(argumentStart.getDate() - 1);
+
+    handleSetViewPort({ argumentEnd, argumentStart });
+  }, []);
+
   useEffect(() => {
     const origin = env === 'development' ? 'http://localhost:8080' : '';
     fetch(`${origin}/api/stats`)
@@ -68,16 +81,31 @@ const RecordChart = () => {
         <ArgumentAxis />
         <ValueAxis tickFormat={format} />
         <AreaSeries name="💡" valueField="powerValue" argumentField="date"/>
-        <LineSeries argumentField="date" valueField="online" name="Online"/>
+        <LineSeries
+          color="#2269af"
+          argumentField="date"
+          valueField="online"
+          name="Online"
+        />
 
         <Title text="⚡️Power outage logger" />
         <ZoomAndPan
           viewport={viewPort}
-          onViewportChange={setViewPort}
+          onViewportChange={handleSetViewPort}
           interactionWithValues
         />
         <Animation />
       </Chart>
+      <div className="ff-btn">
+        <Button
+          onClick={handleMoveToday}
+          variant="contained"
+          endIcon={<Icon>fast_forward</Icon>}
+          color="info"
+        >
+          Latest
+        </Button>
+      </div>
     </Paper>
   );
 };

@@ -123,3 +123,10 @@ a:hover {
     transform: rotate(360deg);
   }
 }
+
+.ff-btn {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
