@@ -18,6 +18,13 @@ jobs:
           name: 'power-outage-sa.json'
           json: ${{ secrets.SA_FIREBASE }}
           dir: 'credentials/'
+      - name: create-tg-bot-credentials
+        id: create-json
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: 'telegram.json'
+          json: ${{ secrets.TELEGRAM_BOT }}
+          dir: 'credentials/'
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v0'

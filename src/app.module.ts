@@ -6,6 +6,7 @@ import { AppLoggerMiddleware } from './middlewares/app-logger.middleware';
 import { join } from 'path';
 import { AppService } from './app.service';
 import { ApiModule } from './api/api.module';
+import { BotModule } from './telegram-bot/bot.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ApiModule } from './api/api.module';
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'client', 'build'),
     }),
+    BotModule,
   ],
   controllers: [],
   providers: [AppService],
