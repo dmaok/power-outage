@@ -36,6 +36,8 @@ export class BotService {
 
   private async init() {
     const { botToken } = require('../../credentials/telegram.json');
+    if (this.bot) return;
+
     this.bot = new Bot(botToken);
     this.startBot();
   }
