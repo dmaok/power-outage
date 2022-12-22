@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Global, Injectable } from '@nestjs/common';
 import { DatabaseService } from '../../db/database.service';
 
+@Global()
 @Injectable()
 export class StatsService {
   constructor(private dbService: DatabaseService) {}
@@ -12,5 +13,9 @@ export class StatsService {
       light: true
     }));
     return response.sort((a, b) => a.time - b.time);
+  }
+
+  getLastItem() {
+    return this.dbService.getLatest('pings', 'time');
   }
 }

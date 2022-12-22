@@ -12,11 +12,18 @@ jobs:
     steps:
       - uses: 'actions/checkout@v2' # work in the sandbox
       - name: create-json-credentials
-        id: create-json
+        id: create-google-json
         uses: jsdaniell/create-json@1.1.2
         with:
           name: 'power-outage-sa.json'
           json: ${{ secrets.SA_FIREBASE }}
+          dir: 'credentials/'
+      - name: create-tg-bot-credentials
+        id: create-tg-json
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: 'telegram.json'
+          json: ${{ secrets.TELEGRAM_BOT }}
           dir: 'credentials/'
       - id: 'auth'
         name: 'Authenticate to Google Cloud'

@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Global, Injectable } from '@nestjs/common';
 import { Firestore, QuerySnapshot } from '@google-cloud/firestore';
 import { join } from 'path';
 
+@Global()
 @Injectable()
 export class DatabaseService {
   private readonly instance: Firestore;
@@ -20,6 +21,13 @@ export class DatabaseService {
 
   async getAll(collection) {
     return this.toArray(await this.db.collection(collection).get());
+  }
+
+  async getLatest(collection: string, orderBy) {
+    return await this.db.collection(collection)
+      .orderBy(orderBy, 'asc')
+      .limitToLast(1)
+      .get();
   }
 
   write<T>(collection: string, data: T) {
