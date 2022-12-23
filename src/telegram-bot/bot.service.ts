@@ -4,12 +4,12 @@ import { DatabaseService } from '../db/database.service';
 import { HttpService } from '@nestjs/axios';
 
 const hayThere = `
-<bold>Hi there! You are subscribed to the lights switches on Lomonosova 71z</bold>
-type <span>/unsubscribe</span> to leave
+<b>Hi there!</b> You are subscribed to the lights switches on Lomonosova 71z.
+Type <code>/unsubscribe</code> to leave
 `;
 
 const bayText = `
-You won't receive notifications. You can always type <span>/start</span> to re resubscribe
+You won't receive notifications. You can always type <code>/start</code> to re resubscribe
 `;
 
 @Global()
