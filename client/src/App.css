@@ -45,7 +45,7 @@ a:hover {
   gap: 1rem;
   height: 100%;
   grid-template-rows: 50px 1fr 50px;
-  padding: 0 1rem;
+  padding: 0;
   background-color: #fff;
   box-shadow: 0 0 17px 5px rgb(255 247 170 / 10%);
 }
