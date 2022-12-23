@@ -2,7 +2,7 @@ import { Link, Outlet } from 'react-router-dom';
 import Container from '@mui/material/Container';
 
 const Layout = () => {
-  return <Container className="h-100" maxWidth="md">
+  return <Container className="h-100 app-container" maxWidth="md">
     <div className="app-layout">
       <header className="app-header">
         <div className="siteName">
